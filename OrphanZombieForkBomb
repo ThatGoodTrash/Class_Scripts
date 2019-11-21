@@ -1,0 +1,60 @@
+#!/bin/bash
+
+export NC='\e[0m'               # Text Reset
+export BRed='\e[1;31m'          # Red
+export BGreen='\e[1;32m'        # Green
+
+function colorComment { echo -e "\n${BGreen}${1}${NC}"
+}
+function colorCommand { echo -e "${BRed}${1}${NC}"
+}
+
+colorCommand "(sleep 30 &)"
+colorComment "# Creates an orphan${NC}"
+(sleep 30 &)
+sleep 2
+ps --forest -el | grep PID | grep -v grep
+ps --forest -el | grep sleep | grep -v grep
+echo
+echo
+
+#################################################
+read -p "Press [Enter] key to continue..."
+echo
+echo
+
+colorCommand "sleep 1 & exec sleep 30"
+colorComment "# Creates a zombie${NC}"
+(sleep 1 & exec sleep 30) &
+sleep 2
+ps --forest -el | grep PID | grep -v grep
+ps --forest -el | grep defunct | grep -v grep
+echo
+echo
+
+read -p "Press [Enter] key give Zombie brains..."
+
+#############################
+colorComment "# ZOMBIE ATTACK"
+
+colorCommand "Hacking Russia${NC}"
+for i in {1..100}; do sleep 0.03; printf "%3d%% " "$i"; printf "%0.s#" $(seq 1 $i); printf "%0.s " $(seq $i 100); printf "\r"; done; echo
+echo
+
+colorCommand "Injecting Code${NC}"
+for i in {1..100}; do sleep 0.03; printf "%3d%% " "$i"; printf "%0.s#" $(seq 1 $i); printf "%0.s " $(seq $i 100); printf "\r"; done; echo
+echo
+
+colorCommand "Get Wr3cked N00bz${NC}"
+for i in {1..100}; do sleep 0.03; printf "%3d%% " "$i"; printf "%0.s#" $(seq 1 $i); printf "%0.s " $(seq $i 100); printf "\r"; done; echo
+
+##################################
+for ((x=0 ; x<100 ; x++));
+do
+        (sleep 1 & exec sleep 30) &
+done
+
+sleep 2
+ps --forest -el | grep defunct | grep -v grep
+
+
